@@ -1,0 +1,136 @@
+@font-face {
+  font-family: 'iA Writer Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url('/fonts/iAWriterMonoV.woff2') format('woff2');
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: dark light;
+  --bg: #1a1a1a;
+  --fg: #cbcccc;
+  --placeholder: #717171;
+  --font: 'iA Writer Mono', ui-monospace, monospace;
+  --font-size: 16px;
+  --line-height: calc(var(--font-size) * 1.7);
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: var(--font);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+
+  background: var(--bg);
+  color: var(--fg);
+}
+
+body {
+  display: flex;
+  padding: var(--line-height) 0;
+}
+
+/* App styles */
+
+@media (min-width: 1440px) {
+  :root {
+    --font-size: 26px;
+  }
+}
+
+main {
+  position: relative;
+  width: 100%;
+  max-width: 59vw;
+  margin: auto;
+  padding-bottom: var(--line-height);
+}
+
+section {
+  position: relative;
+  height: calc(5 * var(--line-height));
+}
+
+textarea {
+  border: none;
+  background: transparent;
+  resize: none;
+  outline: none;
+  color: inherit;
+  user-select: text;
+  padding: 0;
+  margin: 0;
+
+  caret-color: #00bfff;
+  line-height: 1.7;
+  font-size: var(--font-size);
+  font-family: var(--font);
+  line-height: var(--line-height);
+  font-weight: 440;
+
+  word-wrap: break-word;
+  width: 100%;
+  height: calc(5 * var(--line-height));
+
+  overflow: hidden;
+}
+
+textarea::placeholder {
+  color: var(--placeholder);
+}
+
+textarea::selection {
+  background: rgba(255, 255, 255, 0.0001);
+}
+
+header {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--placeholder);
+  margin-bottom: 16px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(4 * var(--line-height));
+  pointer-events: none;
+  user-select: none;
+}
+
+.overlay div {
+  width: 100%;
+  height: var(--line-height);
+}
+
+.overlay div:nth-child(1) {
+  backdrop-filter: blur(3.5px);
+  background: rgba(26, 26, 26, 0.91);
+}
+
+.overlay div:nth-child(2) {
+  backdrop-filter: blur(2.5px);
+  background: rgba(26, 26, 26, 0.87);
+}
+
+.overlay div:nth-child(3) {
+  backdrop-filter: blur(2px);
+  background: rgba(26, 26, 26, 0.72);
+}
+
+.overlay div:nth-child(4) {
+  backdrop-filter: blur(1.5px);
+  background: rgba(26, 26, 26, 0.48);
+}
