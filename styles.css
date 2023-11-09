@@ -18,7 +18,7 @@
   --fg: #cbcccc;
   --placeholder: #717171;
   --font: 'iA Writer Mono', ui-monospace, monospace;
-  --font-size: 16px;
+  --font-size: clamp(16px, 2.5vw, 26px);
   --line-height: calc(var(--font-size) * 1.7);
 }
 
@@ -41,12 +41,6 @@ body {
 }
 
 /* App styles */
-
-@media (min-width: 1440px) {
-  :root {
-    --font-size: 26px;
-  }
-}
 
 main {
   position: relative;

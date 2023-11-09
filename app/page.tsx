@@ -14,15 +14,23 @@ export default function Page() {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
   const savingTimeout = React.useRef<NodeJS.Timeout | null>(null)
 
-  React.useEffect(() => {
-    // Always set selection state to the end of the textarea
-    function handleSelectionChange() {
-      textareaRef.current?.setSelectionRange(textareaRef.current.value.length, textareaRef.current.value.length)
+  function forceFocus(e?: React.SyntheticEvent<HTMLTextAreaElement> | UIEvent | Event) {
+    if (e) {
+      e.preventDefault()
     }
 
-    document.addEventListener('selectionchange', handleSelectionChange)
+    const el = textareaRef.current
+    el.focus()
+    el.setSelectionRange(el.value.length, el.value.length)
+    el.scrollTop = el.scrollHeight
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('resize', forceFocus, { passive: true })
+    document.addEventListener('selectionchange', forceFocus)
     return () => {
-      document.removeEventListener('selectionchange', handleSelectionChange)
+      window.removeEventListener('resize', forceFocus)
+      document.removeEventListener('selectionchange', forceFocus)
     }
   }, [])
 
@@ -102,17 +110,6 @@ export default function Page() {
       document.removeEventListener('keydown', handleKeydown)
     }
   }, [])
-
-  function forceFocus(e?: React.SyntheticEvent<HTMLTextAreaElement>) {
-    if (e) {
-      e.preventDefault()
-    }
-
-    const el = textareaRef.current
-    el.focus()
-    el.setSelectionRange(el.value.length, el.value.length)
-    el.scrollTop = el.scrollHeight
-  }
 
   function save() {
     try {
